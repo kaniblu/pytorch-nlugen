@@ -57,6 +57,7 @@ group.add_argument("--max-length", type=int, default=30)
 group.add_argument("--expand-vocab", action="store_true", default=False)
 group.add_argument("--generation-type", default="gaussian",
                    choices=["gaussian", "posterior", "uniform"])
+group.add_argument("--posterior-sampling-scale", type=float, default=1.0)
 group.add_argument("--uniform-sampling-pa", type=float, default=1.0)
 group.add_argument("--uniform-sampling-pm", type=float, default=1.0)
 
@@ -257,10 +258,11 @@ def report_stats(args, sents, neighbors):
 
 
 class MultivariateGaussianMixtureSampler(object):
-    def __init__(self, means: torch.Tensor, stds: torch.Tensor):
+    def __init__(self, means: torch.Tensor, stds: torch.Tensor, scale=1.0):
         assert len(means) == len(stds)
         self.means = means
         self.stds = stds
+        self.scale = scale
 
     def __len__(self):
         return len(self.means)
@@ -269,7 +271,7 @@ class MultivariateGaussianMixtureSampler(object):
         randidx = torch.randint(0, len(self), (num_samples, )).long()
         means = torch.index_select(self.means, 0, randidx)
         stds = torch.index_select(self.stds, 0, randidx)
-        return torch.randn_like(stds) * stds + means
+        return torch.randn_like(stds) * stds * self.scale + means
 
 
 class UniformNoiseSampler(object):
@@ -343,7 +345,10 @@ def generate(args):
             dataloader = create_dataloader(args, vocabs)
     sampler = utils.map_val(args.generation_type, {
         "gaussian": lambda: None,
-        "posterior": lambda: MultivariateGaussianMixtureSampler(*encoder.encode(dataloader)),
+        "posterior": lambda: MultivariateGaussianMixtureSampler(
+            *encoder.encode(dataloader),
+            scale=args.posterior_sampling_scale
+        ),
         "uniform": lambda: UniformNoiseSampler(
             encoder.encode(dataloader)[0],
             pa=args.uniform_sampling_pa,
