@@ -1,7 +1,7 @@
+import importlib
+
 import torch
 import numpy as np
-import tensorflow as tf
-import tensorflow_hub as hub
 
 import train.embeds
 
@@ -20,8 +20,11 @@ class UniversalSentenceEncoder(AbstractSentenceEncoder):
     def __init__(self, batch_size, minimal_gpumem=True):
         # https://www.tensorflow.org/hub/modules/google/
         # universal-sentence-encoder
+        # requires tensorflow package
+        self.tf_package = importlib.import_module("tensorflow")
+        self.tfhub_package = importlib.import_module("tensorflow_hub")
         self.use_url = "https://tfhub.dev/google/universal-sentence-encoder-large/3"
-        self.use = hub.Module(self.use_url)
+        self.use = self.tfhub_package.Module(self.use_url)
         self.batch_size = batch_size
         self.minimal_gpumem = minimal_gpumem
         self.tf_device = "cpu:0"
@@ -32,6 +35,7 @@ class UniversalSentenceEncoder(AbstractSentenceEncoder):
         #     self.tf_device = f"device:GPU:{self.device.index}"
 
     def encode(self, sents):
+        tf = self.tf_package
         config = tf.ConfigProto()
         if self.minimal_gpumem:
             config.gpu_options.allow_growth = True
