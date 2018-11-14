@@ -1,1 +1,4 @@
+numpy
+pyyaml
 tqdm
+torch==0.4.0
