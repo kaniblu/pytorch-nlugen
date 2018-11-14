@@ -559,7 +559,9 @@ def train(args):
     dataloader = create_dataloader(args)
     vocabs = dataloader.dataset.vocabs
     val_dataloader = None
-    if args.validate and args.validate_understanding:
+    if args.validate and (args.validate_understanding
+            or args.validate_posterior_sampling
+            or args.validate_autoencoding_sampling):
         val_dataloader = create_dataloader(args, vocabs, True)
     fnames = [f"{mode}.vocab" for mode in MODES]
     for vocab, fname in zip(vocabs, fnames):
