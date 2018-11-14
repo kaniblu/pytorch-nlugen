@@ -7,6 +7,7 @@ import train.embeds
 
 
 class AbstractSentenceEncoder(object):
+
     def encode(self, sents):
         """
         encodes sentences into fixed-size vectors
@@ -15,6 +16,7 @@ class AbstractSentenceEncoder(object):
         """
 
 class UniversalSentenceEncoder(AbstractSentenceEncoder):
+
     def __init__(self, batch_size, minimal_gpumem=True):
         # https://www.tensorflow.org/hub/modules/google/
         # universal-sentence-encoder
@@ -42,6 +44,7 @@ class UniversalSentenceEncoder(AbstractSentenceEncoder):
 
 
 class WordEmbeddingSentenceEncoder(AbstractSentenceEncoder):
+
     def __init__(self, word_embs: train.embeds.Embeddings):
         self.word_embs = word_embs
 
@@ -58,6 +61,7 @@ class WordEmbeddingSentenceEncoder(AbstractSentenceEncoder):
 
 
 class Analyzer(object):
+
     def __init__(self, encoder: AbstractSentenceEncoder, device):
         self.encoder = encoder
         self.device = device

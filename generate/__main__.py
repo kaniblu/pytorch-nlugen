@@ -108,6 +108,7 @@ def prepare_model(args, vocabs):
 
 
 class Generator(object):
+
     def __init__(self, model, device, batch_size, beam_size, validate,
                  sent_vocab, label_vocab, intent_vocab, bos, eos, unk,
                  max_len, beam_topk):
@@ -258,6 +259,7 @@ def report_stats(args, sents, neighbors):
 
 
 class MultivariateGaussianMixtureSampler(object):
+
     def __init__(self, means: torch.Tensor, stds: torch.Tensor, scale=1.0):
         assert len(means) == len(stds)
         self.means = means
@@ -275,6 +277,7 @@ class MultivariateGaussianMixtureSampler(object):
 
 
 class UniformNoiseSampler(object):
+
     """Kurata et al. 2016"""
     def __init__(self, embs, pa=1.0, pm=1.0):
         self.embs = embs
@@ -361,14 +364,14 @@ def generate(args):
         if dataloader is None:
             dataloader = create_dataloader(args, vocabs)
         sents = [data["string"][0] for data in dataloader.dataset]
-        with torch.no_grad():
-            searcher = neighbor.PyTorchNNSearcher(
-                sents=sents,
-                num_neighbors=args.nearest_neighbors,
-                batch_size=args.nearest_neighbors_batch_size,
-                device=devices[0]
-            )
-            neighbors = searcher.search(gens[0])
+        searcher = neighbor.PyTorchPCASearcher(
+            pca_dim=100,
+            sents=sents,
+            num_neighbors=args.nearest_neighbors,
+            batch_size=args.nearest_neighbors_batch_size,
+            device=devices[0]
+        )
+        neighbors = searcher.search(gens[0])
     else:
         neighbors = None
     report_stats(args, gens[0], neighbors)
