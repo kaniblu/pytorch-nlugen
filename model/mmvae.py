@@ -6,6 +6,7 @@ from . import discrete_decoder
 
 
 class AbstractMultimodalVariationalAutoencoder(common.Module):
+
     """
     xs: tuple of [batch_size, seq_len] LongTensor
     lens: tuple of [batch_size] LongTensor
@@ -23,6 +24,7 @@ class AbstractMultimodalVariationalAutoencoder(common.Module):
 
 
 class MultimodalVariationalAutoencoder(AbstractMultimodalVariationalAutoencoder):
+
     name = "multimodal-variational-autoencoder"
 
     def __init__(self, *args, singulars=True,

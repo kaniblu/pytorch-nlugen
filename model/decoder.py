@@ -6,6 +6,7 @@ from . import nonlinear
 
 
 class AbstractSequenceDecoder(common.Module):
+
     def __init__(self, in_dim, hidden_dim, out_dim):
         super(AbstractSequenceDecoder, self).__init__()
         self.in_dim = in_dim
@@ -17,6 +18,7 @@ class AbstractSequenceDecoder(common.Module):
 
 
 class RNNDecoder(AbstractSequenceDecoder):
+
     name = "rnn-decoder"
 
     def __init__(self, *args, cell=rnn.GRUCell, **kwargs):
@@ -46,6 +48,7 @@ class RNNDecoder(AbstractSequenceDecoder):
 
 
 class RNNRecallingDecoder(AbstractSequenceDecoder):
+
     name = "rnn-recalling-decoder"
 
     def __init__(self, *args, cell=rnn.GRUCell, **kwargs):

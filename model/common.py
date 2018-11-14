@@ -31,16 +31,19 @@ def recursively_reset_parameters(parent):
 
 
 class Sequential(nn.Sequential):
+
     def reset_parameters(self):
         recursively_reset_parameters(self)
 
 
 class ModuleList(nn.ModuleList):
+
     def reset_parameters(self):
         recursively_reset_parameters(self)
 
 
 class Linear(nn.Linear):
+
     def reset_parameters(self):
         init.xavier_normal_(self.weight.detach())
 
@@ -49,6 +52,7 @@ class Linear(nn.Linear):
 
 
 class ArgumentDictionary(dict):
+
     @staticmethod
     def from_namespace(namespace):
         return ArgumentDictionary(vars(namespace))
@@ -59,6 +63,7 @@ class ArgumentDictionary(dict):
 
 
 class InitializerCreator(object):
+
     def __init__(self, pkg):
         self.pkg = pkg
         self.cls = None
@@ -94,6 +99,7 @@ def get_caster(value):
 
 
 class OptionalArgument(object):
+
     def __init__(self, name, caster=str, default=None, islist=False):
         assert caster is not None
         self.name = name
@@ -125,6 +131,7 @@ def nullable_add(a, b):
 
 
 class Module(nn.Module):
+
     """The way you define your custom module is quite elegant.
     The common painstaking part of building a custom module is that
     module arguments could mean anything.
@@ -231,6 +238,7 @@ class Module(nn.Module):
 
 
 class Identity(Module):
+
     def __init__(self):
         super(Identity, self).__init__()
 
@@ -239,6 +247,7 @@ class Identity(Module):
 
 
 class Concat(Module):
+
     def __init__(self, dim=1):
         super(Concat, self).__init__()
         self.dim = dim
@@ -248,5 +257,6 @@ class Concat(Module):
 
 
 class Parameter(nn.Parameter):
+
     def reset_parameters(self):
         self.data.detach().zero_()

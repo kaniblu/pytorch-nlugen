@@ -10,6 +10,7 @@ from . import common
 
 
 class BasePooling(common.Module):
+
     def __init__(self, dim):
         super(BasePooling, self).__init__()
         self.dim = dim
@@ -19,6 +20,7 @@ class BasePooling(common.Module):
 
 
 class MaxPooling(BasePooling):
+
     name = "max-pool"
 
     def pool(self, x):
@@ -38,6 +40,7 @@ class MaxPooling(BasePooling):
 
 
 class SumPooling(BasePooling):
+
     name = "sum-pool"
 
     def pool(self, x):
@@ -56,6 +59,7 @@ class SumPooling(BasePooling):
 
 
 class MeanPooling(BasePooling):
+
     name = "mean-pool"
 
     def forward(self, x, lens=None):
@@ -67,6 +71,7 @@ class MeanPooling(BasePooling):
 
 
 class LastPooling(BasePooling):
+
     name = "last-pool"
 
     def forward(self, x, lens=None):

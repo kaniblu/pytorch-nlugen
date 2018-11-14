@@ -2,7 +2,6 @@ import os
 import sys
 import yaml
 import json
-import pprint
 import random
 import logging
 import argparse
@@ -21,6 +20,7 @@ FLOAT_MIN = float(np.finfo(np.float32).min)
 
 
 class Vocabulary(object):
+
     def __init__(self):
         self.f2i = {}
         self.i2f = {}
@@ -323,6 +323,7 @@ def exclude(items, ex):
 
 
 class UniversalFileReader(object):
+
     def __init__(self, default_ext=None):
         self.extdict = {}
         self.default_ext = default_ext

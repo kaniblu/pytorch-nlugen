@@ -6,6 +6,7 @@ from . import embedding
 
 
 class AbstractPairedDiscreteDecoders(common.Module):
+
     """decoder0 -> decoder1"""
     def __init__(self, hidden_dim, vocab_size0, word_dim0,
                  vocab_size1, word_dim1):
@@ -22,6 +23,7 @@ class AbstractPairedDiscreteDecoders(common.Module):
 
 
 class PairedDiscreteDecoders(AbstractPairedDiscreteDecoders):
+
     name = "paired-discrete-decoders"
 
     def __init__(self, *args,

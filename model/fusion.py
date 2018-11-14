@@ -6,6 +6,7 @@ from . import nonlinear
 
 
 class BaseFusion(common.Module):
+
     def __init__(self, in_dims, out_dim):
         super(BaseFusion, self).__init__()
         self.in_dims = in_dims
@@ -16,6 +17,7 @@ class BaseFusion(common.Module):
 
 
 class ConcatNonlinearFusion(BaseFusion):
+
     name = "concat-nonlinear"
 
     def __init__(self, *args, **kwargs):
@@ -30,6 +32,7 @@ class ConcatNonlinearFusion(BaseFusion):
 
 
 class BaseDimMatchFusion(BaseFusion):
+
     def __init__(self, in_dims, out_dim):
         super(BaseDimMatchFusion, self).__init__(in_dims, out_dim)
         self.in_nonlinears = common.ModuleList([
@@ -48,6 +51,7 @@ class BaseDimMatchFusion(BaseFusion):
 
 
 class MLBSumFusion(BaseDimMatchFusion):
+
     name = "mlb-sum"
 
     def fuse(self, *xs):
@@ -55,6 +59,7 @@ class MLBSumFusion(BaseDimMatchFusion):
 
 
 class MLBFusion(BaseDimMatchFusion):
+
     name = "mlb"
 
     def fuse(self, *xs):
@@ -62,6 +67,7 @@ class MLBFusion(BaseDimMatchFusion):
 
 
 class GatedSoftmaxFusion(BaseDimMatchFusion):
+
     name = "mlb-gated"
 
     def __init__(self, in_dims, out_dim):
@@ -81,6 +87,7 @@ class GatedSoftmaxFusion(BaseDimMatchFusion):
 
 
 class GatedSigmoidFusion(BaseDimMatchFusion):
+
     name = "mlb-gated-sigmoid"
 
     def __init__(self, in_dims, out_dim):
@@ -100,6 +107,7 @@ class GatedSigmoidFusion(BaseDimMatchFusion):
 
 
 class GeneralizedFusion(BaseDimMatchFusion):
+
     name = "generalized-fusion"
 
     def __init__(self, *args, bias=False, **kwargs):
@@ -134,6 +142,7 @@ class GeneralizedFusion(BaseDimMatchFusion):
 
 
 class GeneralizedFusionWithAbs(GeneralizedFusion):
+
     name = "generalized-fusion-abs"
 
     def num_subfuses(self):
@@ -144,6 +153,7 @@ class GeneralizedFusionWithAbs(GeneralizedFusion):
 
 
 class GatedBinaryFusion(BaseDimMatchFusion):
+
     name = "mlb-bingated"
 
     def __init__(self, *args, **kwargs):

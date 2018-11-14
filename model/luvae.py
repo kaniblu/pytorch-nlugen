@@ -13,6 +13,7 @@ from . import decoder
 
 
 class AbstractLanguageUnderstandingVAE(common.Module):
+
     def __init__(self, z_dim, word_dim, label_dim, intent_dim,
                  num_words, num_labels, num_intents):
         super(AbstractLanguageUnderstandingVAE, self).__init__()
@@ -48,6 +49,7 @@ class AbstractLanguageUnderstandingVAE(common.Module):
 
 
 class LanguageUnderstandingVAE(AbstractLanguageUnderstandingVAE):
+
     name = "luvae"
 
     def __init__(self, *args, singulars=False,
@@ -264,6 +266,7 @@ class LanguageUnderstandingVAE(AbstractLanguageUnderstandingVAE):
 
 
 class ConditionalLUVAE(AbstractLanguageUnderstandingVAE):
+
     name = "cond-luvae"
 
     def __init__(self, *args, word_dropout=0.0,
@@ -564,6 +567,7 @@ class ConditionalLUVAE(AbstractLanguageUnderstandingVAE):
 
 
 class NewConditionalLUVAE(AbstractLanguageUnderstandingVAE):
+
     name = "new-cond-luvae"
 
     def __init__(self, *args, word_dropout=0.0,

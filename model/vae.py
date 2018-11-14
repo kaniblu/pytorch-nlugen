@@ -7,6 +7,7 @@ from . import embedding
 
 
 class VariationalSentenceAutoencoder(common.Module):
+
     name = "variational-sentence-autoencoder"
 
     def __init__(self, z_dim, word_dim, vocab_size, *,

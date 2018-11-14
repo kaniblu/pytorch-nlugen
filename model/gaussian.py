@@ -5,6 +5,7 @@ from . import nonlinear
 
 
 class AbstractGaussianSampling(common.Module):
+
     def __init__(self, in_dim, out_dim):
         super(AbstractGaussianSampling, self).__init__()
         self.in_dim = in_dim
@@ -21,6 +22,7 @@ class AbstractGaussianSampling(common.Module):
 
 
 class ReparameterizedGaussianSampling(AbstractGaussianSampling):
+
     name = "reparam-gaussian-sampling"
 
     def __init__(self, *args, enforce_unit=False, loss_scale=1.0,
@@ -65,6 +67,7 @@ class ReparameterizedGaussianSampling(AbstractGaussianSampling):
 
 
 class BugFixedRGaussianSampling(AbstractGaussianSampling):
+
     name = "bug-fixed-reparam-gaussian-sampling"
 
     def __init__(self, *args, enforce_unit=False, loss_scale=1.0,

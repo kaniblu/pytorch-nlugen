@@ -6,6 +6,7 @@ from . import embedding
 
 
 class AbstractDiscreteSequenceDecoder(common.Module):
+
     def __init__(self, vocab_size, word_dim, hidden_dim):
         super(AbstractDiscreteSequenceDecoder, self).__init__()
         self.vocab_size = vocab_size
@@ -20,6 +21,7 @@ class AbstractDiscreteSequenceDecoder(common.Module):
 
 
 class DiscreteSequenceDecoder(AbstractDiscreteSequenceDecoder):
+
     name = "discrete-sequence-decoder"
 
     def __init__(self, *args,

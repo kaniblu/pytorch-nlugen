@@ -164,6 +164,7 @@ def has_none(l):
 
 
 class Trainer(object):
+
     def __init__(self, debug, model, device, vocabs, epochs, save_dir,
                  save_period, optimizer_cls=op.Adam, enable_tensorboard=False,
                  show_progress=True, kld_annealing=None, tensor_key="tensor",

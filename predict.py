@@ -90,6 +90,7 @@ def prepare_model(args, vocabs):
 
 
 class Predictor(object):
+
     def __init__(self, model, device, batch_size, beam_size,
                  sent_vocab, label_vocab, intent_vocab, bos, eos, unk,
                  tensor_key="tensor"):

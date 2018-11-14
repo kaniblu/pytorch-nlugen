@@ -11,6 +11,7 @@ from . import embedding
 
 
 class DiscreteSequenceEncoder(common.Module):
+
     def __init__(self, vocab_size, word_dim, hidden_dim, *,
                  emb=embedding.AbstractEmbedding,
                  enc=encoder.AbstractSequenceEncoder):
@@ -36,6 +37,7 @@ class DiscreteSequenceEncoder(common.Module):
 
 
 class VariationalRecurrentEncoderDecoder(common.Module):
+
     name = "variational-recurrent-encoder-decoder"
 
     def __init__(self, z_dim, enc_word_dim, enc_vocab_size,

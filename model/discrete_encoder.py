@@ -5,6 +5,7 @@ from . import embedding
 
 
 class AbstractDiscreteSequenceEncoder(common.Module):
+
     """
     x: [batch_size, seq_len] LongTensor
     lens: [batch_size] LongTensor
@@ -20,6 +21,7 @@ class AbstractDiscreteSequenceEncoder(common.Module):
 
 
 class DiscreteSequenceEncoder(AbstractDiscreteSequenceEncoder):
+
     name = "discrete-sequence-encoder"
 
     def __init__(self, *args,

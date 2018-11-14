@@ -16,6 +16,7 @@ def init_rnn(cell, gain=1):
 
 
 class BaseRNNCell(common.Module):
+
     """returns [batch_size, seq_len, hidden_dim]"""
     def __init__(self, input_dim, hidden_dim, *, dynamic=False,
                  layers=1, dropout=0):
@@ -56,6 +57,7 @@ class BaseRNNCell(common.Module):
 
 
 class LSTMCell(BaseRNNCell):
+
     name = "lstm-rnn"
 
     def __init__(self, *args, **kwargs):
@@ -87,6 +89,7 @@ class LSTMCell(BaseRNNCell):
 
 
 class BidirectionalLSTMCell(LSTMCell):
+
     name = "bilstm-rnn"
 
     def _lstm_kwargs(self):
@@ -116,6 +119,7 @@ class BidirectionalLSTMCell(LSTMCell):
 
 
 class GRUCell(BaseRNNCell):
+
     name = "gru-rnn"
 
     def __init__(self, *args, **kwargs):
@@ -143,6 +147,7 @@ class GRUCell(BaseRNNCell):
 
 
 class BidirectionalGRUCell(GRUCell):
+
     name = "bigru-rnn"
 
     def _gru_kwargs(self):

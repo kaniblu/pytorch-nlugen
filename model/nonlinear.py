@@ -5,6 +5,7 @@ from . import common
 
 
 class AbstractNonlinear(common.Module):
+
     def __init__(self, in_dim, out_dim=None):
         super(AbstractNonlinear, self).__init__()
         if out_dim is None:
@@ -13,6 +14,7 @@ class AbstractNonlinear(common.Module):
 
 
 class FunctionalNonlinear(AbstractNonlinear):
+
     def __init__(self, *args, **kwargs):
         super(FunctionalNonlinear, self).__init__(*args, **kwargs)
         self.linear = common.Linear(self.in_dim, self.out_dim)
@@ -28,6 +30,7 @@ class FunctionalNonlinear(AbstractNonlinear):
 
 
 class TanhNonlinear(FunctionalNonlinear):
+
     name = "tanh"
 
     def get_func(cls):
@@ -35,6 +38,7 @@ class TanhNonlinear(FunctionalNonlinear):
 
 
 class ReluNonlinear(FunctionalNonlinear):
+
     name = "relu"
 
     def get_func(cls):
@@ -42,6 +46,7 @@ class ReluNonlinear(FunctionalNonlinear):
 
 
 class GatedTanhNonlinear(AbstractNonlinear):
+
     name = "gated-tanh"
 
     def __init__(self, *args, **kwargs):

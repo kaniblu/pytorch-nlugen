@@ -23,6 +23,7 @@ def add_embed_arguments(parser, name=None):
 
 
 class Embeddings(object):
+
     name = None
 
     @property
@@ -56,6 +57,7 @@ class Embeddings(object):
 
 
 class GloveFormatReader(utils.UniversalFileReader):
+
     def open_txt(self, path):
         return open(path, "r")
 
@@ -64,6 +66,7 @@ class GloveFormatReader(utils.UniversalFileReader):
 
 
 class TarFormatEmbeddings(Embeddings):
+
     name = "tar-format"
 
     def __init__(self, path):
@@ -101,6 +104,7 @@ class TarFormatEmbeddings(Embeddings):
 
 
 class GloveFormatEmbeddings(Embeddings):
+
     name = "glove-format"
 
     def __init__(self, path, dim=300, words=None):
@@ -161,6 +165,7 @@ class GloveFormatEmbeddings(Embeddings):
 
 
 class WordEmbeddingManager(object):
+
     def __init__(self):
         self.embeds = dict()
 

@@ -5,6 +5,7 @@ from . import nonlinear
 
 
 class AbstractSequenceEncoder(common.Module):
+
     def __init__(self, in_dim, out_dim):
         super(AbstractSequenceEncoder, self).__init__()
         self.in_dim = in_dim
@@ -15,6 +16,7 @@ class AbstractSequenceEncoder(common.Module):
 
 
 class RNNEncoder(AbstractSequenceEncoder):
+
     def __init__(self, *args, cell=rnn.GRUCell, **kwargs):
         super(RNNEncoder, self).__init__(*args, **kwargs)
         self.rnn_cls = cell
@@ -29,6 +31,7 @@ class RNNEncoder(AbstractSequenceEncoder):
 
 
 class LastStateRNNEncoder(RNNEncoder):
+
     name = "last-state-rnn-encoder"
 
     def forward_loss(self, x, lens=None):
@@ -38,6 +41,7 @@ class LastStateRNNEncoder(RNNEncoder):
 
 
 class PooledRNNEncoder(RNNEncoder):
+
     name = "pooled-rnn-encoder"
 
     def __init__(self, *args, pool=pooling.MaxPooling, **kwargs):

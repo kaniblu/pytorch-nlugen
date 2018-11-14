@@ -5,6 +5,7 @@ from sklearn import metrics
 
 
 class ConllEvaluator(object):
+
     START_TAGS = {
         ("B", "B"),
         ("I", "B"),

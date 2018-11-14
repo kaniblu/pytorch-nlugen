@@ -9,6 +9,7 @@ import utils
 
 
 class TextFileReader(utils.UniversalFileReader):
+
     def __init__(self):
         super(TextFileReader, self).__init__("txt")
 
@@ -37,6 +38,7 @@ def pad_sequences(x, max_len=None, pad_idx=0):
 
 
 class TextSequenceDataset(td.Dataset):
+
     FEATURES = {
         "string",
         "tensor"
@@ -118,6 +120,7 @@ class TextSequenceDataset(td.Dataset):
 
 
 class TextSequenceBatchCollator(object):
+
     FEATURES = {
         "string": "list",
         "tensor": "tensorvarlist"
