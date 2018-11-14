@@ -4,6 +4,7 @@ import utils
 
 
 class Encoder(object):
+
     def __init__(self, model, device, batch_size):
         self.model = model
         self.device = device
@@ -20,19 +21,20 @@ class Encoder(object):
         return batch_size, (w, l, i[:, 1], w_lens)
 
     def encode(self, dataloader):
-        self.model.train(False)
-        self.step = 0
-        progress = utils.tqdm(
-            total=len(dataloader.dataset),
-            desc=f"encoding distribution",
-        )
-        means, stds = [], []
-        for batch in dataloader:
-            batch_size, (w, l, i, lens) = self.prepare_batch(batch)
-            self.step += batch_size
-            progress.update(batch_size)
-            mean, std = self.model.encode(w, l, i, lens)
-            means.append(mean.cpu())
-            stds.append(std.cpu())
-        progress.close()
-        return torch.cat(means, 0), torch.cat(stds, 0)
+        with torch.no_grad():
+            self.model.train(False)
+            self.step = 0
+            progress = utils.tqdm(
+                total=len(dataloader.dataset),
+                desc=f"encoding distribution",
+            )
+            means, stds = [], []
+            for batch in dataloader:
+                batch_size, (w, l, i, lens) = self.prepare_batch(batch)
+                self.step += batch_size
+                progress.update(batch_size)
+                mean, std = self.model.encode(w, l, i, lens)
+                means.append(mean.cpu())
+                stds.append(std.cpu())
+            progress.close()
+            return torch.cat(means, 0), torch.cat(stds, 0)
