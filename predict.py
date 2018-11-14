@@ -15,7 +15,10 @@ from train import embeds
 
 MODES = model.MODES
 
-parser = argparse.ArgumentParser(fromfile_prefix_chars="@")
+parser = argparse.ArgumentParser(
+    fromfile_prefix_chars="@",
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter
+)
 
 group = parser.add_argument_group("Logging Options")
 utils.add_logging_arguments(group, "predict")
